@@ -92,7 +92,7 @@ Perfect this is looking promising, let's go ahead and send that request to our B
 
  ![FreeGifts.JS](FreeGifts.png)
 
-Awesome we got a 200 OK ! this is looking really good so far lets spam this a few more times turn off our interception and see if they gifts hit out inventory.
+Awesome we got a 200 OK ! this is looking really good so far lets spam this a few more times, turn off our interception and then see if the gifts hit out inventory.
 
  ![Proof.JS](Proof.png)
 

@@ -9,7 +9,7 @@ I quickly identified the main game server: (https://fw.bigvikinggames.com). Focu
 ![FishWorldGame.png](FishWorldGame.png)
 
 ## Exploring JavaScript
-Digging into the intercepted JavaScript code revealed intriguing insights. Here's a snippet from our exploration:
+Digging into the intercepted JavaScript code revealed intriguing insights. Here's a snippet from my exploration:
 
 ![ShowFreeGift.png](ShowFreeGift.png)
 
@@ -45,9 +45,9 @@ $.ajax({
 
 ## Understanding Gift Handling
 
-Further exploration led us to understand how gifts are managed using Facebook's UI requests. These requests handle the distribution and tracking of gifts within Fishworld.
+Further exploration led me to understand how gifts are managed using Facebook's UI requests. These requests handle the distribution and tracking of gifts within Fishworld.
 
-With more digging we've found this rather neat function named HandleRequests and from what I can tell this handles the acceptance or rejection of all gift types and internally just uses a Case statement to switch between them all. After reading it more it all boils down to this endpoint:
+With more digging I've found this rather neat function named HandleRequests and from what I can tell this handles the acceptance or rejection of all gift types and internally just uses a Case statement to switch between them all. After reading it more it all boils down to this endpoint:
 
 ![FreeGift.JS](HandleRequests.png)
 
@@ -72,7 +72,7 @@ $.ajax({
 });
 ```
 
-Just a further bit down in the same function we also see this sneaky bit of code:
+Just a further bit down in the same function I also see this sneaky bit of code:
 
 ```javascript
 if (id.indexOf("_") !== -1) {   // delete Facebook request
@@ -82,17 +82,17 @@ if (id.indexOf("_") !== -1) {   // delete Facebook request
 }
 ```
 
-Here we can see that the facebook Requests is deleted and removed from the que, client side! This is a big red flag, if our handle_request function doesn't check the facebook requests server side. We can just go ahead and call that end point over and over again accepting the same gift infinitely, lets test it out - We go into our gift requests tab in-game and turn on our burpsuite intereception once again :
+Here I can see that the facebook Requests is deleted and removed from the que, client side! This is a big red flag, if our handle_request function doesn't check the facebook requests server side. We can just go ahead and call that end point over and over again accepting the same gift infinitely, lets test it out - We go into our gift requests tab in-game and turn on our burpsuite intereception once again :
 
  ![HandleRequestPacket.JS](handleRequestPacket.png)
 
 ## Exploiting Vulnerabilities
 
-Perfect this is looking promising, let's go ahead and send that request to our BurpSuite Repeater and try clam our gift over and over again !
+Perfect this is looking promising, let's go ahead and send that request to our BurpSuite Repeater and try claim our gift over and over again !
 
  ![FreeGifts.JS](FreeGifts.png)
 
-Awesome we got a 200 OK ! this is looking really good so far lets spam this a few more times, turn off our interception and then see if the gifts hit out inventory.
+Awesome we got a 200 OK ! this is looking really good so far lets spam this a few more times, turn off our interception and then see if the gifts hit our inventory.
 
  ![Proof.JS](Proof.png)
 
